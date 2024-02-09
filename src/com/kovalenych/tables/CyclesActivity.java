@@ -15,6 +15,7 @@ import com.kovalenych.R;
 import com.kovalenych.Table;
 import com.kovalenych.Utils;
 import com.kovalenych.stats.SessionChooserActivity;
+import io.github.pixee.security.ObjectInputFilters;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -271,6 +272,7 @@ public class CyclesActivity extends Activity implements Soundable, Const {
             if (chosenNum == -1) throw new FileNotFoundException();
             FileInputStream fis = new FileInputStream(fl[chosenNum]);
             ObjectInputStream obj_in = new ObjectInputStream(fis);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(obj_in);
             Object obj = obj_in.readObject();
             if (obj instanceof Table)
                 curTable = (Table) obj;
